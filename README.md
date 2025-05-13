@@ -22,6 +22,7 @@
 ---
 
 ## 📁 디렉토리 구조
+``` 
 swim_fit_predictor/
 ├── notebook/
 │ └── review_crawling.ipynb
@@ -31,6 +32,7 @@ swim_fit_predictor/
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+``` 
 
 ---
 
