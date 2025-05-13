@@ -1,7 +1,5 @@
-<p align="center">
-  <img src="imgs/swimfit_thumbnail.png" alt="SwimFitPredictor Thumbnail" width="700"/><br/>
-  <em>수집한 수영복 리뷰 데이터 (키, 몸무게, 사이즈, 리뷰 텍스트 포함)</em>
-</p>
+![SwimFitPredictor Thumbnail](imgs/swimfit_thumbnail.png)
+_수집한 수영복 리뷰 데이터 (키, 몸무게, 사이즈, 리뷰 텍스트 포함)_
 
 # 🩱 SwimFitPredictor
 
