@@ -1,0 +1,6 @@
+selenium
+pandas
+tqdm
+beautifulsoup4
+scikit-image
+imageio
