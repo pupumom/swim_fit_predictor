@@ -1,5 +1,9 @@
 # 🩱 SwimFitPredictor
 
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
+![Last Commit](https://img.shields.io/github/last-commit/pupumom/swim_fit_predictor?style=flat)
+![Repo Size](https://img.shields.io/github/repo-size/pupumom/swim_fit_predictor)
+
 **수영복 리뷰 데이터를 기반으로 사이즈 추천 모델을 개발하기 위한 데이터 수집 프로젝트입니다.**  
 가나스윔 사이트의 리뷰를 크롤링하여 키, 몸무게, 평소 착용 사이즈, 구매 사이즈 등 정보를 수집했습니다.
 
