@@ -1,3 +1,8 @@
+![SwimFitPredictor Thumbnail](imgs/swimfit_thumbnail.png)
+_수집한 수영복 리뷰 데이터 (키, 몸무게, 사이즈, 리뷰 텍스트 포함)_
+
+---
+
 # 🩱 SwimFitPredictor
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)
