@@ -9,7 +9,7 @@ _수집한 수영복 리뷰 데이터 (키, 몸무게, 사이즈, 리뷰 텍스�
 ![Last Commit](https://img.shields.io/github/last-commit/pupumom/swim_fit_predictor?style=flat)
 ![Repo Size](https://img.shields.io/github/repo-size/pupumom/swim_fit_predictor)
 
-**수영복 사이즈 추천 모델 & EDA 프로젝트**
+**수영복 사이즈 추천 모델 & EDA 프로젝트**  
 가나스윔 사이트의 리뷰를 크롤링하여 키, 몸무게, 평소 착용 사이즈, 구매 사이즈 등 정보를 수집했습니다.
 
 
