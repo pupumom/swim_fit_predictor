@@ -24,7 +24,7 @@ _수집한 수영복 리뷰 데이터 (키, 몸무게, 사이즈, 리뷰 텍스�
   - Selenium을 활용한 iframe 기반 리뷰 크롤링
   - 데이터 전처리 및 EDA
   - SMOTE로 데이터 불균형 처리
-  - LightGBM 모델 학습
+  - 다양한 분류 모델 학습 (DT, RF, GBM, XGBoost, LGBM, SVC)
   - GridSearchCV로 하이퍼파라미터 최적화
 
 
@@ -103,32 +103,20 @@ grid_search.fit(X_train, y_train)
 
 ### 1. 전처리 및 모델링 실험
 
-- 전처리 데이터:
-  1. 브랜드명 feature 제외
-  2. 브랜드명 feature 포함
+- 전처리 및 모델링 개요:
+  - MinMaxScaler를 활용한 수치 정규화
+  - 클래스 불균형 해결을 위한 SMOTE 적용
+  - GridSearchCV, RandomizedSearchCV를 통한 하이퍼파라미터 튜닝
+  - 성능 비교 및 시각화를 통한 최종 모델 선정
 
 - 비교한 분류 모델:
-  - LGBM Classifier
-  - SVC
-  - KNN
-  - XGBoost
   - Logistic Regression
   - Decision Tree
   - Random Forest
   - Gradient Boosting Classifier
-
-| Model                    | 브랜드명 제외 | 브랜드명 포함 |
-|--------------------------|---------------|---------------|
-| LGBM Classifier          | 0.624         | 0.685         |
-| SVC                      | 0.583         | 0.635         |
-| KNN                      | 0.610         | 0.672         |
-| XGBoost                  | 0.616         | 0.662         |
-| Logistic Regression      | 0.596         | 0.692         |
-| Decision Tree            | 0.620         | 0.672         |
-| Random Forest            | 0.626         | 0.679         |
-| Gradient Boosting        | 0.622         | 0.677         |
-
-→ **브랜드명 feature를 포함했을 때 모든 모델에서 성능이 향상됨**
+  - XGBoost
+  - LightGBM
+  - SVC
 
 ---
 
@@ -151,7 +139,7 @@ grid_search.fit(X_train, y_train)
 
 ### 3. 하이퍼파라미터 튜닝 (GridSearchCV)
 
-탐색한 파라미터:
+#### 탐색한 파라미터:
 ```python
 param_grid = {
     'num_leaves': [31, 50],
@@ -163,6 +151,16 @@ param_grid = {
     'colsample_bytree': [0.8, 1.0]
 }
 ```
+
+#### 주요 모델별 하이퍼파라미터 요약
+| 모델 | 주요 하이퍼파라미터 |
+|------|----------------------|
+| Decision Tree | max_depth=7 |
+| Random Forest | n_estimators=100, max_depth=10 |
+| Gradient Boosting | n_estimators=100, learning_rate=0.1, max_depth=6 |
+| XGBoost | n_estimators=100, learning_rate=0.1, max_depth=6, subsample=0.8, colsample_bytree=0.8 |
+| LightGBM | n_estimators=100, learning_rate=0.1, max_depth=9 |
+| SVC | kernel='linear', C=1.0, probability=True |
 
 최종 성능:
 - Best Test Accuracy: 0.79
@@ -177,13 +175,28 @@ param_grid = {
   - Train Accuracy: 약 81%
   - Test Accuracy: 약 79%
 
+#### 모델 성능 비교 테이블
+| Model                 | Train Accuracy | Test Accuracy | F1 Score (Weighted) |
+|------------------|----------------|----------------|---------------------|
+| Decision Tree         | 0.8147         | 0.7814         | 0.77                |
+| Random Forest         | 0.7644         | 0.7562         | 0.75                |
+| Gradient Boosting  ⭐️ | 0.8099         | 0.7940         | 0.79                |
+| XGBoost               | 0.8179         | 0.7876         | 0.78                |
+| LightGBM              | 0.8007         | 0.7860         | 0.78                |
+| SVC                   | 0.6837         | 0.6748         | 0.67                |
+
+#### 모델별 Test Accuracy 비교
+![모델별 Test Accuracy 비교](imgs/test_accuracy.png)
+
+#### 모델별 F1-Score(Weighted) 비교
+![모델별 F1-Score 비교](imgs/f1-score.png)
+
 ---
 
-## 향후 개선 방향
-
-- 더 다양한 브랜드/리뷰 데이터 추가
-- f1-score, precision-recall 중심의 성능 분석
-- 웹 앱 형태로 추천 기능 제공
+## 최종 모델 선정
+- <mark>Gradient Boosting</mark> 모델이 테스트 데이터에서 가장 높은 정확도(0.7940)와 F1 Score(0.79)를 기록함
+- 전체 모델 중 가장 우수한 Test Accuracy와 F1 Score를 보였으며, 과적합 없이 안정적인 성능을 나타냄
+- 따라서 본 프로젝트에서는 Gradient Boosting을 최종 추천 모델로 선정함
 
 ---
 
