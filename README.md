@@ -14,19 +14,29 @@ _수집한 수영복 리뷰 데이터 (키, 몸무게, 사이즈, 리뷰 텍스�
 가나스윔 사이트의 리뷰를 크롤링하여 키, 몸무게, 평소 착용 사이즈, 구매 사이즈 등 정보를 수집하여  
 사용자의 니즈에 맞는 수영복 사이즈를 추천하는 모델을 구축하였습니다.
 
-
 ---
 
 ## 프로젝트 개요
 
-- **목적**: 사용자 체형(키, 몸무게, 성별, 평소 사이즈)과 브랜드 정보를 기반으로 적절한 수영복 구매 사이즈 예측
-- **주요 작업**:
-  - Selenium을 활용한 iframe 기반 리뷰 크롤링
-  - 데이터 전처리 및 EDA
-  - SMOTE로 데이터 불균형 처리
-  - 다양한 분류 모델 학습 (DT, RF, GBM, XGBoost, LGBM, SVC)
-  - GridSearchCV로 하이퍼파라미터 최적화
+### 목표
+- 사용자 리뷰 데이터를 기반으로 수영복 사이즈 분류 모델을 구축한다.
+- 최종적으로 예측 정확도와 F1 Score가 높은 모델을 선정하여 추천 시스템에 활용할 수 있도록 한다.
 
+### 데이터 구성
+- 입력 변수: 키(height), 몸무게(weight), 평소 착용 사이즈, 구매한 수영복 브랜드 등
+- 목표 변수(Target Variable): 사용자가 구매한 실제 수영복 사이즈 (정답 라벨)
+
+### 전처리 및 모델링 개요
+- MinMaxScaler를 활용한 수치 정규화
+- 클래스 불균형 해결을 위한 SMOTE 적용
+- 다양한 분류 모델 학습 (DT, RF, GBM, XGBoost, LGBM, SVC)
+- GridSearchCV, RandomizedSearchCV를 통한 하이퍼파라미터 튜닝
+- 성능 비교 및 시각화를 통한 최종 모델 선정
+
+### 최종 모델 선정
+- **Gradient Boosting** 모델이 테스트 데이터에서 가장 높은 정확도(0.7940)와 F1 Score(0.79)를 기록함
+- 전체 모델 중 가장 우수한 Test Accuracy와 F1 Score를 보였으며, 과적합 없이 안정적인 성능을 나타냄
+- 따라서 본 프로젝트에서는 Gradient Boosting을 최종 추천 모델로 선정함
 
 ---
 
@@ -101,26 +111,7 @@ grid_search.fit(X_train, y_train)
 
 ---
 
-### 1. 전처리 및 모델링 실험
-
-- 전처리 및 모델링 개요:
-  - MinMaxScaler를 활용한 수치 정규화
-  - 클래스 불균형 해결을 위한 SMOTE 적용
-  - GridSearchCV, RandomizedSearchCV를 통한 하이퍼파라미터 튜닝
-  - 성능 비교 및 시각화를 통한 최종 모델 선정
-
-- 비교한 분류 모델:
-  - Logistic Regression
-  - Decision Tree
-  - Random Forest
-  - Gradient Boosting Classifier
-  - XGBoost
-  - LightGBM
-  - SVC
-
----
-
-### 2. 데이터 불균형 처리 (SMOTE)
+### 1. 데이터 불균형 처리 (SMOTE)
 
 | Size  | Before SMOTE | After SMOTE |
 |-------|--------------|-------------|
@@ -137,7 +128,7 @@ grid_search.fit(X_train, y_train)
 
 ---
 
-### 3. 하이퍼파라미터 튜닝 (GridSearchCV)
+### 2. 하이퍼파라미터 튜닝 (GridSearchCV)
 
 #### 탐색한 파라미터:
 ```python
